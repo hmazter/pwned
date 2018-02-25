@@ -19,7 +19,8 @@ $container
  */
 $container
     ->register(\App\Command\PwnedCommand::class, \App\Command\PwnedCommand::class)
-    ->addArgument(new Reference(\App\Pwned\PwnedPasswords::class));
+    ->addArgument(new Reference(\App\Pwned\PwnedPasswords::class))
+    ->addTag('console.command');
 
 
 return $container;

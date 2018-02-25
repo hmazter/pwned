@@ -11,7 +11,10 @@ $container = require_once __DIR__ . '/config/services.php';
 
 $application = new Application();
 
-$application->add($container->get(\App\Command\PwnedCommand::class));
+$consoleCommands = $container->findTaggedServiceIds('console.command');
+foreach ($consoleCommands as $consoleCommand => $tags) {
+    $application->add($container->get($consoleCommand));
+}
 $application->setDefaultCommand('pwned', true);
 
 $application->run();
