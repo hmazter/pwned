@@ -7,6 +7,19 @@ use GuzzleHttp\Client;
 
 class PwnedPasswords
 {
+    /**
+     * @var Client
+     */
+    private $client;
+
+    /**
+     * @param Client $client
+     */
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     public function check($password): int
     {
         $hash = HashedPassword::hash($password);
@@ -17,10 +30,9 @@ class PwnedPasswords
 
     private function queryApi(string $prefix): array
     {
-        $uri = 'https://api.pwnedpasswords.com/range/' . $prefix;
-        $client = new Client();
-        $response = $client->get($uri);
+        $response = $this->client->get('https://api.pwnedpasswords.com/range/' . $prefix);
         $content = $response->getBody()->getContents();
+
         $suffixes = [];
         $rows = explode("\n", $content);
         foreach ($rows as $row) {

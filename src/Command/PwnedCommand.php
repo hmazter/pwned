@@ -13,17 +13,15 @@ class PwnedCommand extends Command
 {
     private $pwnedPasswords;
 
-    public function __construct()
+    public function __construct(PwnedPasswords $pwnedPasswords)
     {
         parent::__construct();
 
-        $this->pwnedPasswords = new PwnedPasswords();
+        $this->pwnedPasswords = $pwnedPasswords;
     }
 
     protected function configure()
     {
-        parent::configure();
-
         $this->setName('pwned')
             ->setDescription('Check a password against the Pwned Passwords database');
     }

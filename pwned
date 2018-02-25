@@ -4,10 +4,14 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+/** @var ContainerBuilder $container */
+$container = require_once __DIR__ . '/config/services.php';
 
 $application = new Application();
 
-$application->add(new \App\Command\PwnedCommand());
+$application->add($container->get(\App\Command\PwnedCommand::class));
 $application->setDefaultCommand('pwned', true);
 
 $application->run();
