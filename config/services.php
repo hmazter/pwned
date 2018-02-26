@@ -2,25 +2,21 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 $container = new ContainerBuilder();
 
-$container
-    ->register(\GuzzleHttp\Client::class, \GuzzleHttp\Client::class);
-
-$container
-    ->register(\App\Pwned\PwnedPasswords::class, \App\Pwned\PwnedPasswords::class)
-    ->addArgument(new Reference(\GuzzleHttp\Client::class));
-
+$container->autowire(\GuzzleHttp\Client::class)->setPublic(false);
+$container->autowire(\App\Pwned\PwnedPasswords::class)->setPublic(false);
 
 /*
  * Commands
  */
 $container
-    ->register(\App\Command\PwnedCommand::class, \App\Command\PwnedCommand::class)
-    ->addArgument(new Reference(\App\Pwned\PwnedPasswords::class))
+    ->autowire(\App\Command\PwnedCommand::class)
+    ->setPublic(true)
     ->addTag('console.command');
 
+
+$container->compile();
 
 return $container;

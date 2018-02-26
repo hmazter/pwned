@@ -15,6 +15,7 @@ $consoleCommands = $container->findTaggedServiceIds('console.command');
 foreach ($consoleCommands as $consoleCommand => $tags) {
     $application->add($container->get($consoleCommand));
 }
+
 $application->setDefaultCommand('pwned', true);
 
 $application->run();
