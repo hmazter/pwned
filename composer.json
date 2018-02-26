@@ -1,6 +1,6 @@
 {
   "name": "hmazter/pwned",
-  "description": "Check a password against the Pwned Passwords database",
+  "description": "CLI-app to check a password against the Pwned Passwords database.",
   "type": "project",
   "license": "MIT",
   "authors": [
