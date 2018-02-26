@@ -36,7 +36,7 @@ class PwnedCommand extends Command
         $occurrences = $this->pwnedPasswords->check($password);
 
         if ($occurrences === 0) {
-            $output->writeln('<info>As far as I know, this has not appeared in any breach</info>');
+            $output->writeln('<info>Good! As far as I know, this has not appeared in any breach</info>');
         } else {
             $output->writeln("<error>Oh no! This password has occurred $occurrences times in breaches</error>");
         }
