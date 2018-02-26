@@ -30,6 +30,7 @@ class PwnedCommand extends Command
     {
         $helper = $this->getHelper('question');
         $question = new Question('What password to check? ');
+        $question->setHidden(true);
         $password = $helper->ask($input, $output, $question);
 
         $occurrences = $this->pwnedPasswords->check($password);
